@@ -1,47 +1,39 @@
-# Shibanshi — Video Editor Portfolio
+# Shibanshi — Video Editor & AI Storyteller Portfolio
 
-A clean, modern, and minimalist portfolio website built with HTML5, CSS3, JavaScript, and subtle GSAP ScrollTrigger animations.
-
-Designed specifically for **Shibanshi (Scripted Edits)** to showcase video editing projects with direct Google Drive links.
+A clean, modern, and high-performance video editor portfolio with **direct in-site video playback**, cinema theater mode, and Google Drive project integration.
 
 ---
 
-## 🌟 Highlights
-- **Clean & Minimal Aesthetic**: Dark obsidian background with subtle borders, glassmorphic floating navigation, and crisp typography.
-- **Google Drive Project Integration**: Cards designed for quick preview with one-click **"Watch on Google Drive"** buttons.
-- **Smooth GSAP & ScrollTrigger**: Subtle fade-and-rise animations on page load and as you scroll down.
-- **Interactive Project Filters**: Instant filter tabs for All, YouTube, Short-Form (9:16), and Commercial.
-- **Copy Email**: One-click email copy with clean toast feedback.
-- **Responsive**: Fully optimized for mobile phones, tablets, and desktop displays.
+## 🎬 Video Player Features
+- **In-Site Video Playback**: Visitors can play your YouTube Shorts and edits directly on the page without redirecting or opening new tabs.
+- **Cinema / Theater Lightbox Mode**: Click any video or the "Cinema" button to open a high-resolution vertical 9:16 theater modal with unmuted audio, scrubber, and fullscreen capabilities.
+- **Audio & Mute Toggle**: Dedicated toggle on every video card to enable/disable sound.
+- **Fast-Start H.264 Web Streaming**: Videos are optimized with fast-start streaming headers so they start playing instantly.
+- **AI Storytelling Integration**: Dedicated cards showcasing your generative AI video creations with Picsart and local video support.
 
 ---
 
 ## 📁 File Structure
 ```
 portfolio/
-├── index.html        # Main structure, bio, and project cards
-├── style.css         # Modern dark-mode styling & responsive rules
-├── script.js         # GSAP animations, filter tabs, & copy button
-└── README.md         # Documentation
+├── assets/
+│   └── videos/
+│       ├── thar-sunset.mp4       # Sunset Thar Edit (H.264 + AAC 1080x1920)
+│       └── thar-viral.mp4        # Dynamic Thar Edit (H.264 + AAC 1080x1920)
+├── index.html                    # Main HTML & Video Cards
+├── style.css                     # Modern dark theme & video player styles
+├── script.js                     # In-card player logic, cinema modal, & filters
+└── README.md                     # Documentation
 ```
 
 ---
 
-## 🔗 How to Update Your Google Drive Links
-In `index.html`, find the `<div class="projects-grid">` section. Update the placeholder links (`https://drive.google.com`) with your actual Google Drive video share links:
-
+## 📹 How to Add More Local Videos (e.g. AI MP4s)
+1. Export or download your AI video from Picsart/Runway as an `.mp4` file.
+2. Place the video file inside `assets/videos/` (e.g., `assets/videos/ai-story-1.mp4`).
+3. In `index.html`, replace the card's visual container with a `<video>` tag matching the existing cards:
 ```html
-<a href="YOUR_ACTUAL_DRIVE_LINK_HERE" target="_blank" rel="noopener noreferrer" class="drive-link-btn">
-  <span>Watch on Google Drive</span>
-  ...
-</a>
-```
-
-To update your **Master Drive Reel** link at the top, change the `href` in:
-```html
-<a href="YOUR_MASTER_DRIVE_FOLDER_LINK" target="_blank" class="btn btn-secondary">
-  Master Drive Reel ↗
-</a>
+<video class="video-element" src="assets/videos/ai-story-1.mp4" poster="your-poster.jpg" preload="metadata" playsinline loop></video>
 ```
 
 ---
