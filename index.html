@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCRIPTED EDITS // Video Editor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #FDFBF7;
+      --black: #0A0A0A;
+      --yellow: #FFE600;
+      --pink: #FF4D79;
+      --green: #23FF78;
+      --border: 3px solid var(--black);
+      --shadow: 5px 5px 0px var(--black);
+      --shadow-hover: 8px 8px 0px var(--black);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg);
+      background-image: 
+        radial-gradient(circle at 1px 1px, #000000 1px, transparent 0);
+      background-size: 24px 24px;
+      font-family: 'Space Grotesk', sans-serif;
+      color: var(--black);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 680px;
+      width: 100%;
+      background: #FFFFFF;
+      border: var(--border);
+      box-shadow: 8px 8px 0px var(--black);
+      padding: 40px 32px;
+      position: relative;
+    }
+
+    .badge {
+      display: inline-block;
+      background: var(--yellow);
+      border: var(--border);
+      font-family: 'Space Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      padding: 6px 14px;
+      box-shadow: 3px 3px 0px var(--black);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 20px;
+      transform: rotate(-1.5deg);
+    }
+
+    h1 {
+      font-size: clamp(32px, 6vw, 54px);
+      font-weight: 900;
+      line-height: 1.05;
+      text-transform: uppercase;
+      letter-spacing: -1.5px;
+      margin-bottom: 16px;
+    }
+
+    h1 span {
+      background: var(--pink);
+      color: #FFF;
+      padding: 0 8px;
+      display: inline-block;
+      border: var(--border);
+      box-shadow: 3px 3px 0px var(--black);
+      transform: rotate(1deg);
+    }
+
+    p.lead {
+      font-size: 18px;
+      line-height: 1.5;
+      font-family: 'Space Mono', monospace;
+      color: #333;
+      margin-bottom: 28px;
+      border-left: 4px solid var(--black);
+      padding-left: 14px;
+    }
+
+    .status-box {
+      background: var(--green);
+      border: var(--border);
+      box-shadow: 4px 4px 0px var(--black);
+      padding: 16px;
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 14px;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .pulse-dot {
+      width: 14px;
+      height: 14px;
+      background: var(--black);
+      border-radius: 50%;
+      display: inline-block;
+      animation: pulse 1s infinite alternate;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(0.85); opacity: 0.6; }
+      100% { transform: scale(1.2); opacity: 1; }
+    }
+
+    .btn-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: 'Space Mono', monospace;
+      font-weight: 700;
+      font-size: 14px;
+      padding: 14px 22px;
+      border: var(--border);
+      box-shadow: var(--shadow);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
+      text-transform: uppercase;
+    }
+
+    .btn:hover {
+      transform: translate(-3px, -3px);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 2px 2px 0px var(--black);
+    }
+
+    .btn-secondary {
+      background: #FFF;
+    }
+
+    .footer-stamp {
+      position: absolute;
+      bottom: -15px;
+      right: 20px;
+      background: var(--black);
+      color: #FFF;
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      padding: 4px 10px;
+      transform: rotate(-2deg);
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <div class="badge">⚡ VIDEO EDITOR // SCRIPTED EDITS</div>
+    
+    <h1>CUTTING FAST. <span>HITTING HARD.</span></h1>
+    
+    <p class="lead">
+      Crafting high-retention video edits, sound design that slaps, and motion graphics that keep eyes glued.
+    </p>
+
+    <div class="status-box">
+      <span class="pulse-dot"></span>
+      <span>[STATUS] PORTFOLIO IN THE CUTTING ROOM // DROPPING SOON</span>
+    </div>
+
+    <div class="btn-group">
+      <a href="https://github.com/scriptededits" target="_blank" class="btn">GITHUB PROFILE ↗</a>
+      <a href="#drive" class="btn btn-secondary">DRIVE PORTFOLIO 📁</a>
+    </div>
+
+    <div class="footer-stamp">v0.1 // INITIAL BUILD</div>
+  </div>
+
+</body>
+</html>
