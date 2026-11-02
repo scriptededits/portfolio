@@ -1,5 +1,5 @@
 /* ============================================================
-   SHIBANSHI — MINIMAL & MODERN VIDEO EDITOR PORTFOLIO
+   SHIBANSHI — MINIMAL & MODERN VIDEO EDITOR & AI STORYTELLER
    ============================================================ */
 
 :root {
@@ -17,6 +17,7 @@
   --accent-light: #818CF8;
   --accent-gradient: linear-gradient(135deg, #6366F1 0%, #A855F7 100%);
   --success: #10B981;
+  --ai-purple: #C084FC;
 
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   --font-heading: 'Plus Jakarta Sans', var(--font-sans);
@@ -297,7 +298,7 @@ body::before {
 
 .stat-number {
   font-family: var(--font-heading);
-  font-size: 26px;
+  font-size: 24px;
   font-weight: 800;
   color: var(--text-primary);
   line-height: 1.1;
@@ -475,22 +476,52 @@ body::before {
   transform: translateY(-4px);
 }
 
-/* Card Visual Mockups */
+/* Card Visual Containers & Images */
 .card-visual {
-  height: 180px;
+  height: 200px;
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   border-bottom: 1px solid var(--border);
+  overflow: hidden;
 }
 
-.visual-gradient-1 { background: radial-gradient(circle at top right, rgba(99, 102, 241, 0.35), transparent 70%), #151722; }
-.visual-gradient-2 { background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.35), transparent 70%), #151722; }
-.visual-gradient-3 { background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.35), transparent 70%), #151722; }
-.visual-gradient-4 { background: radial-gradient(circle at top right, rgba(245, 158, 11, 0.35), transparent 70%), #151722; }
-.visual-gradient-5 { background: radial-gradient(circle at top right, rgba(14, 165, 233, 0.35), transparent 70%), #151722; }
-.visual-gradient-6 { background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.35), transparent 70%), #151722; }
+.visual-with-image {
+  background: #000;
+}
+
+.card-img-thumb {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.85;
+  transition: transform 0.4s ease, opacity 0.3s ease;
+}
+
+.project-card:hover .card-img-thumb {
+  transform: scale(1.05);
+  opacity: 0.95;
+}
+
+.visual-gradient-ai-1 {
+  background: radial-gradient(circle at top right, rgba(168, 85, 247, 0.45), rgba(99, 102, 241, 0.25), #0B0D14);
+}
+
+.visual-gradient-ai-2 {
+  background: radial-gradient(circle at top right, rgba(236, 72, 153, 0.4), rgba(139, 92, 246, 0.25), #0B0D14);
+}
+
+.visual-gradient-ai-3 {
+  background: radial-gradient(circle at top right, rgba(59, 130, 246, 0.4), rgba(147, 51, 234, 0.25), #0B0D14);
+}
+
+.visual-gradient-drive {
+  background: radial-gradient(circle at top right, rgba(16, 185, 129, 0.35), rgba(59, 130, 246, 0.2), #0B0D14);
+}
 
 .visual-badge {
   position: absolute;
@@ -499,30 +530,33 @@ body::before {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 500;
-  color: var(--text-secondary);
-  background: rgba(0, 0, 0, 0.5);
+  color: var(--text-primary);
+  background: rgba(0, 0, 0, 0.65);
   backdrop-filter: blur(8px);
-  padding: 4px 8px;
+  padding: 4px 10px;
   border-radius: var(--radius-sm);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  z-index: 2;
 }
 
 .play-indicator {
-  width: 46px;
-  height: 46px;
+  width: 50px;
+  height: 50px;
   border-radius: 50%;
-  background: rgba(255, 255, 255, 0.12);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.16);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.25);
   display: flex;
   align-items: center;
   justify-content: center;
   color: #FFF;
+  text-decoration: none;
+  z-index: 2;
   transition: all var(--transition-smooth);
 }
 
 .project-card:hover .play-indicator {
-  transform: scale(1.1);
+  transform: scale(1.12);
   background: var(--text-primary);
   color: var(--bg);
 }
@@ -581,6 +615,14 @@ body::before {
 
 .drive-link-btn:hover {
   color: var(--text-primary);
+}
+
+.highlight-ai-btn {
+  color: var(--ai-purple);
+}
+
+.highlight-ai-btn:hover {
+  color: #FFF;
 }
 
 /* Master Drive Callout */
@@ -712,6 +754,7 @@ body::before {
   gap: 20px;
   border-top: 1px solid var(--border);
   padding-top: 24px;
+  flex-wrap: wrap;
 }
 
 .social-links a {
