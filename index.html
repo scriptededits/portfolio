@@ -3,200 +3,578 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SCRIPTED EDITS // Video Editor</title>
+  <title>SHIBANSHI // SCRIPTED EDITS — Video Editor & Motion Designer</title>
+  
+  <!-- Meta SEO -->
+  <meta name="description" content="Portfolio of Shibanshi (Scripted Edits) — Video Editor specializing in high-retention editing, motion graphics, sound design, and color grading.">
+
+  <!-- Google Fonts: Space Grotesk & Space Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --bg: #FDFBF7;
-      --black: #0A0A0A;
-      --yellow: #FFE600;
-      --pink: #FF4D79;
-      --green: #23FF78;
-      --border: 3px solid var(--black);
-      --shadow: 5px 5px 0px var(--black);
-      --shadow-hover: 8px 8px 0px var(--black);
-    }
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="style.css">
 
-    body {
-      background-color: var(--bg);
-      background-image: 
-        radial-gradient(circle at 1px 1px, #000000 1px, transparent 0);
-      background-size: 24px 24px;
-      font-family: 'Space Grotesk', sans-serif;
-      color: var(--black);
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-    }
-
-    .container {
-      max-width: 680px;
-      width: 100%;
-      background: #FFFFFF;
-      border: var(--border);
-      box-shadow: 8px 8px 0px var(--black);
-      padding: 40px 32px;
-      position: relative;
-    }
-
-    .badge {
-      display: inline-block;
-      background: var(--yellow);
-      border: var(--border);
-      font-family: 'Space Mono', monospace;
-      font-size: 13px;
-      font-weight: 700;
-      padding: 6px 14px;
-      box-shadow: 3px 3px 0px var(--black);
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      margin-bottom: 20px;
-      transform: rotate(-1.5deg);
-    }
-
-    h1 {
-      font-size: clamp(32px, 6vw, 54px);
-      font-weight: 900;
-      line-height: 1.05;
-      text-transform: uppercase;
-      letter-spacing: -1.5px;
-      margin-bottom: 16px;
-    }
-
-    h1 span {
-      background: var(--pink);
-      color: #FFF;
-      padding: 0 8px;
-      display: inline-block;
-      border: var(--border);
-      box-shadow: 3px 3px 0px var(--black);
-      transform: rotate(1deg);
-    }
-
-    p.lead {
-      font-size: 18px;
-      line-height: 1.5;
-      font-family: 'Space Mono', monospace;
-      color: #333;
-      margin-bottom: 28px;
-      border-left: 4px solid var(--black);
-      padding-left: 14px;
-    }
-
-    .status-box {
-      background: var(--green);
-      border: var(--border);
-      box-shadow: 4px 4px 0px var(--black);
-      padding: 16px;
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 14px;
-      margin-bottom: 28px;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .pulse-dot {
-      width: 14px;
-      height: 14px;
-      background: var(--black);
-      border-radius: 50%;
-      display: inline-block;
-      animation: pulse 1s infinite alternate;
-    }
-
-    @keyframes pulse {
-      0% { transform: scale(0.85); opacity: 0.6; }
-      100% { transform: scale(1.2); opacity: 1; }
-    }
-
-    .btn-group {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--yellow);
-      color: var(--black);
-      font-family: 'Space Mono', monospace;
-      font-weight: 700;
-      font-size: 14px;
-      padding: 14px 22px;
-      border: var(--border);
-      box-shadow: var(--shadow);
-      text-decoration: none;
-      cursor: pointer;
-      transition: all 0.15s cubic-bezier(0.2, 0, 0, 1);
-      text-transform: uppercase;
-    }
-
-    .btn:hover {
-      transform: translate(-3px, -3px);
-      box-shadow: var(--shadow-hover);
-    }
-
-    .btn:active {
-      transform: translate(2px, 2px);
-      box-shadow: 2px 2px 0px var(--black);
-    }
-
-    .btn-secondary {
-      background: #FFF;
-    }
-
-    .footer-stamp {
-      position: absolute;
-      bottom: -15px;
-      right: 20px;
-      background: var(--black);
-      color: #FFF;
-      font-family: 'Space Mono', monospace;
-      font-size: 11px;
-      padding: 4px 10px;
-      transform: rotate(-2deg);
-      letter-spacing: 1px;
-    }
-  </style>
+  <!-- GSAP & ScrollTrigger -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 </head>
 <body>
 
-  <div class="container">
-    <div class="badge">⚡ VIDEO EDITOR // SCRIPTED EDITS</div>
-    
-    <h1>CUTTING FAST. <span>HITTING HARD.</span></h1>
-    
-    <p class="lead">
-      Crafting high-retention video edits, sound design that slaps, and motion graphics that keep eyes glued.
-    </p>
+  <!-- Custom Brutalist Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-outline" id="cursorOutline"></div>
 
-    <div class="status-box">
-      <span class="pulse-dot"></span>
-      <span>[STATUS] PORTFOLIO IN THE CUTTING ROOM // DROPPING SOON</span>
-    </div>
-
-    <div class="btn-group">
-      <a href="https://github.com/scriptededits" target="_blank" class="btn">GITHUB PROFILE ↗</a>
-      <a href="#drive" class="btn btn-secondary">DRIVE PORTFOLIO 📁</a>
-    </div>
-
-    <div class="footer-stamp">v0.1 // INITIAL BUILD</div>
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress-container">
+    <div class="scroll-progress-bar" id="progressBar"></div>
   </div>
 
+  <!-- Noise Overlay for Retro Analog Vibe -->
+  <div class="grain-overlay"></div>
+
+  <!-- Top Sticky Announcement Bar -->
+  <div class="top-bar">
+    <div class="marquee-track">
+      <span class="marquee-content">
+        🔴 AVAILABLE FOR CLIENT WORK (Q1/Q2) ✦ FAST TURNAROUND ✦ 50M+ COMBINED VIEWS ✦ YOUTUBE • SHORTS • REELS • COMMERCIALS ✦ 
+        🔴 AVAILABLE FOR CLIENT WORK (Q1/Q2) ✦ FAST TURNAROUND ✦ 50M+ COMBINED VIEWS ✦ YOUTUBE • SHORTS • REELS • COMMERCIALS ✦
+      </span>
+    </div>
+  </div>
+
+  <!-- Main Navigation -->
+  <header class="navbar">
+    <a href="#" class="logo-box">
+      <span class="logo-text">SCRIPTED<span class="accent-text">EDITS</span></span>
+      <span class="logo-sub">SHIBANSHI // 2026</span>
+    </a>
+
+    <nav class="nav-links">
+      <a href="#about" class="nav-item">ABOUT</a>
+      <a href="#projects" class="nav-item">PROJECTS</a>
+      <a href="#services" class="nav-item">SERVICES</a>
+      <a href="#contact" class="nav-item nav-btn-highlight">LET'S TALK ↗</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="hero">
+    <div class="hero-container">
+      
+      <div class="hero-badge-row">
+        <span class="brutal-tag tag-pink">⚡ VIDEO EDITOR & MOTION DESIGNER</span>
+        <span class="brutal-tag tag-yellow">✂ RETENTION SPECIALIST</span>
+      </div>
+
+      <h1 class="hero-title">
+        CUTTING FAST.<br>
+        <span class="highlight-wrapper">
+          <span class="highlight-box">HITTING HARD.</span>
+        </span>
+      </h1>
+
+      <p class="hero-desc">
+        Hey, I'm <strong>Shibanshi</strong>. I turn raw footage into magnetic visual experiences. High-retention pacing, punchy sound design, and custom motion graphics tailored for creators, brands, and digital storytellers.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#projects" class="btn btn-main">
+          EXPLORE PROJECTS <span class="arrow">↓</span>
+        </a>
+        <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-drive" id="masterDriveBtn">
+          MASTER DRIVE FOLDER 📁
+        </a>
+        <button class="btn btn-secondary copy-email-btn" data-email="edits.shibanshi@gmail.com">
+          <span>COPY EMAIL</span> 📋
+        </button>
+      </div>
+
+      <!-- Quick Metrics Grid -->
+      <div class="metrics-grid">
+        <div class="metric-card metric-yellow">
+          <div class="metric-num">50M+</div>
+          <div class="metric-label">VIEWS GENERATED</div>
+        </div>
+        <div class="metric-card metric-blue">
+          <div class="metric-num">100+</div>
+          <div class="metric-label">PROJECTS DELIVERED</div>
+        </div>
+        <div class="metric-card metric-green">
+          <div class="metric-num">48H</div>
+          <div class="metric-label">AVERAGE TURNAROUND</div>
+        </div>
+        <div class="metric-card metric-pink">
+          <div class="metric-num">4K</div>
+          <div class="metric-label">MASTER QUALITY</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Interactive Infinite Software & Skill Ticker -->
+  <section class="ticker-banner">
+    <div class="ticker-wrap" id="mainTicker">
+      <div class="ticker-move">
+        <span>PREMIERE PRO</span> <span class="star">✦</span>
+        <span>AFTER EFFECTS</span> <span class="star">✦</span>
+        <span>DAVINCI RESOLVE</span> <span class="star">✦</span>
+        <span>SOUND DESIGN & MIXING</span> <span class="star">✦</span>
+        <span>VIRAL RETENTION PACING</span> <span class="star">✦</span>
+        <span>4K COLOR GRADING</span> <span class="star">✦</span>
+        <span>YOUTUBE LONGFORM</span> <span class="star">✦</span>
+        <span>TIKTOK & REELS 9:16</span> <span class="star">✦</span>
+        <span>MOTION TYPOGRAPHY</span> <span class="star">✦</span>
+        <span>BLENDER 3D ASSETS</span> <span class="star">✦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section class="about-section" id="about">
+    <div class="section-container">
+
+      <div class="section-header">
+        <div class="section-tag">01 // THE CUTTING ROOM</div>
+        <h2 class="section-title">WHO'S BEHIND THE TIMELINE?</h2>
+      </div>
+
+      <div class="about-grid">
+        <!-- Bio Card -->
+        <div class="about-card main-bio">
+          <div class="cassette-header">
+            <span class="rec-dot"></span>
+            <span>SYSTEM // BIO_DATA.TXT</span>
+            <span class="stamp">VERIFIED EDITOR</span>
+          </div>
+          <p class="bio-lead">
+            In a world with 3-second attention spans, boring edits die instantly.
+          </p>
+          <p class="bio-text">
+            I edit videos that grip viewers from the first frame and refuse to let go. Whether it's high-octane YouTube essays, hyper-paced viral shorts, or cinematic commercial work, I construct intentional rhythm, surgical cuts, sound effects with tactile punch, and color palettes that pop off AMOLED screens.
+          </p>
+          <div class="bio-meta">
+            <div class="meta-item">
+              <span class="meta-label">PRIMARY WEAPONS:</span>
+              <span class="meta-val">Adobe Premiere Pro, After Effects, DaVinci Resolve Studio</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">LOCATION & TIMEZONE:</span>
+              <span class="meta-val">Remote // Flexible Worldwide Collabs (IST / EST / GMT)</span>
+            </div>
+            <div class="meta-item">
+              <span class="meta-label">DIRECT EMAIL:</span>
+              <span class="meta-val highlight-email">edits.shibanshi@gmail.com</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Feature Pillars -->
+        <div class="pillars-column">
+          <div class="pillar-card pillar-1">
+            <div class="pillar-icon">🎯</div>
+            <h3>Pacing & Retention</h3>
+            <p>Removing dead air, optimizing hook psychology, dynamic zooms, and visual rhythm that maximizes Watch Time and AVD.</p>
+          </div>
+          <div class="pillar-card pillar-2">
+            <div class="pillar-icon">🔊</div>
+            <h3>Punchy Sound Design</h3>
+            <p>Layered foley, cinematic risers, sub-bass drops, tactile UI clicks, and seamless music ducking that make videos feel 3D.</p>
+          </div>
+          <div class="pillar-card pillar-3">
+            <div class="pillar-icon">🎨</div>
+            <h3>Color & Motion Graphics</h3>
+            <p>DaVinci Resolve film emulations, custom animated titles, motion tracking, and graphics that fit your brand aesthetic.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section (Google Drive Links Showcase) -->
+  <section class="projects-section" id="projects">
+    <div class="section-container">
+
+      <div class="section-header">
+        <div class="section-tag">02 // SELECTED WORKS</div>
+        <h2 class="section-title">THE DRIVE VAULT</h2>
+        <p class="section-subtitle">
+          Click any project card to open its high-definition video directly in Google Drive.
+        </p>
+      </div>
+
+      <!-- Category Filter Buttons -->
+      <div class="filter-bar">
+        <button class="filter-btn active" data-filter="all">ALL WORKS (6)</button>
+        <button class="filter-btn" data-filter="youtube">YOUTUBE LONGFORM</button>
+        <button class="filter-btn" data-filter="shorts">SHORTS & REELS (9:16)</button>
+        <button class="filter-btn" data-filter="commercial">COMMERCIAL & AD</button>
+        <button class="filter-btn" data-filter="cinematic">CINEMATIC & MOTION</button>
+      </div>
+
+      <!-- Project Cards Grid -->
+      <div class="projects-grid">
+
+        <!-- Project 1: YouTube Longform -->
+        <div class="project-card" data-category="youtube">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:04:12:09</span>
+              <span class="fps">16:9 • 60 FPS</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <!-- Visual Graphic Mockup -->
+            <div class="project-thumb thumb-youtube">
+              <div class="thumb-content">
+                <span class="thumb-badge">YOUTUBE ESSAY</span>
+                <h3>THE $100M CREATOR EMPIRE</h3>
+                <p>Retention pacing • B-Roll assembly • Narrative sound</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#PremierePro</span>
+              <span class="tag-pill">#AfterEffects</span>
+              <span class="tag-pill">#StoryPacing</span>
+            </div>
+            <h3 class="project-name">The $100M Creator Blueprint (Full Documentary)</h3>
+            <p class="project-desc">
+              Long-form documentary cut packed with historical footage restorations, bespoke motion maps, fast narrative momentum, and dynamic audio mastering.
+            </p>
+            <div class="project-links">
+              <!-- Replace href with your actual Google Drive link -->
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 2: Viral Short-Form -->
+        <div class="project-card" data-category="shorts">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:00:38:15</span>
+              <span class="fps">9:16 • 4K</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <div class="project-thumb thumb-shorts">
+              <div class="thumb-content">
+                <span class="thumb-badge">VIRAL REEL / TIKTOK</span>
+                <h3>HOOK & HOLD (9:16)</h3>
+                <p>Dynamic subtitles • SFX • 8M+ Views</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#Shorts</span>
+              <span class="tag-pill">#MotionTypography</span>
+              <span class="tag-pill">#FastSFX</span>
+            </div>
+            <h3 class="project-name">High-Velocity Short-Form Batch (Reels & Shorts)</h3>
+            <p class="project-desc">
+              Aggressive 0.5s visual hook, custom animated typography with emoji accent pops, rapid zooms, sound effects every 2 seconds, tailored for algorithmic retention.
+            </p>
+            <div class="project-links">
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 3: Commercial Brand Spot -->
+        <div class="project-card" data-category="commercial">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:01:00:00</span>
+              <span class="fps">16:9 • PRORES 422</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <div class="project-thumb thumb-commercial">
+              <div class="thumb-content">
+                <span class="thumb-badge">BRAND COMMERCIAL</span>
+                <h3>NEO-STREETWEAR CAMPAIGN</h3>
+                <p>Speed ramping • Color grading • Glitch VFX</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#DaVinciResolve</span>
+              <span class="tag-pill">#ColorGrading</span>
+              <span class="tag-pill">#RhythmCut</span>
+            </div>
+            <h3 class="project-name">Cyber-Minimalist Apparel Commercial Spot</h3>
+            <p class="project-desc">
+              Surgically beat-matched brand spot featuring aggressive speed ramps, film grain emulation, custom typography title cards, and punchy sound design.
+            </p>
+            <div class="project-links">
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 4: Cinematic / Motion Graphics -->
+        <div class="project-card" data-category="cinematic">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:02:45:11</span>
+              <span class="fps">2.39:1 • CINEMATIC</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <div class="project-thumb thumb-cinematic">
+              <div class="thumb-content">
+                <span class="thumb-badge">CINEMATIC ESSAY</span>
+                <h3>THE FUTURE OF AI & ART</h3>
+                <p>3D Camera tracking • After Effects • Film Look</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#AfterEffects</span>
+              <span class="tag-pill">#3DTracking</span>
+              <span class="tag-pill">#Cinematic</span>
+            </div>
+            <h3 class="project-name">The Neural Renaissance (Visual Essay)</h3>
+            <p class="project-desc">
+              High-production visual essay with complex 3D text tracking, split-screen collage sequences, ambient soundscapes, and color science grading.
+            </p>
+            <div class="project-links">
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 5: Gaming & Tech Montage -->
+        <div class="project-card" data-category="youtube">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:08:14:02</span>
+              <span class="fps">16:9 • 120 FPS</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <div class="project-thumb thumb-gaming">
+              <div class="thumb-content">
+                <span class="thumb-badge">TECH BREAKDOWN</span>
+                <h3>NEXT-GEN HARDWARE REVIEW</h3>
+                <p>Product showcases • Dynamic Callouts • SFX</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#TechEditing</span>
+              <span class="tag-pill">#PremierePro</span>
+              <span class="tag-pill">#SoundFX</span>
+            </div>
+            <h3 class="project-name">Ultimate Studio Setup: Tech Breakdown Cut</h3>
+            <p class="project-desc">
+              Clean, punchy b-roll montage with motion-tracked specification badges, crisp UI foley sound effects, and seamless seamless transitions.
+            </p>
+            <div class="project-links">
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Project 6: Podcast / Talking Head Pacing -->
+        <div class="project-card" data-category="shorts">
+          <div class="project-preview monitor-frame">
+            <div class="monitor-bar">
+              <span class="timecode">TC 00:00:54:20</span>
+              <span class="fps">9:16 • 60 FPS</span>
+              <span class="badge-rec">● REC</span>
+            </div>
+            <div class="project-thumb thumb-podcast">
+              <div class="thumb-content">
+                <span class="thumb-badge">VIRAL PODCAST CUT</span>
+                <h3>UNFILTERED TRUTHS</h3>
+                <p>Multicam cut • Auto-framing • Micro-hooks</p>
+                <div class="play-circle">▶</div>
+              </div>
+            </div>
+          </div>
+          <div class="project-info">
+            <div class="project-tags">
+              <span class="tag-pill">#Multicam</span>
+              <span class="tag-pill">#AudioCleanup</span>
+              <span class="tag-pill">#ViralShorts</span>
+            </div>
+            <h3 class="project-name">High-Stakes Podcast Snippet Package</h3>
+            <p class="project-desc">
+              Multi-angle podcast switching timed with speaker cadence, dialogue noise suppression, dynamic zooms to highlight emotional moments, and subtitle styling.
+            </p>
+            <div class="project-links">
+              <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-project-drive">
+                WATCH ON DRIVE ↗
+              </a>
+              <button class="btn btn-icon copy-link-btn" data-link="https://drive.google.com" title="Copy Drive Link">
+                🔗
+              </button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Master Drive Banner -->
+      <div class="master-drive-banner">
+        <div class="banner-left">
+          <span class="banner-badge">⚡ ALL-ACCESS ARCHIVE</span>
+          <h3>WANT TO BROWSE THE FULL RAW REEL?</h3>
+          <p>Access unlisted drafts, raw 4K exports, alternate cuts, and project project files on Google Drive.</p>
+        </div>
+        <div class="banner-right">
+          <a href="https://drive.google.com" target="_blank" rel="noopener noreferrer" class="btn btn-banner">
+            OPEN MASTER GOOGLE DRIVE ↗
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Services / Offerings -->
+  <section class="services-section" id="services">
+    <div class="section-container">
+
+      <div class="section-header">
+        <div class="section-tag">03 // CAPABILITIES</div>
+        <h2 class="section-title">WHAT I BRING TO THE TABLE</h2>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-box">
+          <div class="service-num">01</div>
+          <h3>YouTube Longform Mastery</h3>
+          <p>Complete assembly, pacing refinement, meme/pop-culture timing, graphic overlays, and narrative retention structuring.</p>
+          <div class="service-tag">HIGH RETENTION</div>
+        </div>
+
+        <div class="service-box">
+          <div class="service-num">02</div>
+          <h3>Vertical Virality (9:16)</h3>
+          <p>Reels, Shorts, TikToks designed to grab thumbs in the first frame with animated typography, sound design, and speed.</p>
+          <div class="service-tag">THUMB-STOPPING</div>
+        </div>
+
+        <div class="service-box">
+          <div class="service-num">03</div>
+          <h3>Motion Graphics & Titles</h3>
+          <p>Custom lower thirds, kinetic typography, kinetic transitions, logo animations, and infographic breakdown elements.</p>
+          <div class="service-tag">AFTER EFFECTS</div>
+        </div>
+
+        <div class="service-box">
+          <div class="service-num">04</div>
+          <h3>Color Grading & Look Dev</h3>
+          <p>Shot matching, LOG/RAW color correction, film grain, LUT craft, and cinematic color palettes in DaVinci Resolve.</p>
+          <div class="service-tag">DAVINCI RESOLVE</div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Contact / Call To Action Section -->
+  <section class="contact-section" id="contact">
+    <div class="section-container">
+      
+      <div class="contact-box">
+        <div class="contact-header">
+          <span class="brutal-tag tag-green">LET'S BUILD SOMETHING SICK</span>
+          <span class="stamp">READY TO EDIT</span>
+        </div>
+
+        <h2 class="contact-title">
+          HAVE RAW FOOTAGE?<br>
+          <span class="contact-strike">LET'S COOK IT INTO GOLD.</span>
+        </h2>
+
+        <p class="contact-lead">
+          Looking for a dedicated editor for your YouTube channel, agency brand campaigns, or viral short-form pipeline? My inbox is always open.
+        </p>
+
+        <div class="contact-email-row">
+          <div class="email-display">
+            <span class="email-text">edits.shibanshi@gmail.com</span>
+          </div>
+          <button class="btn btn-main copy-email-btn" data-email="edits.shibanshi@gmail.com">
+            COPY EMAIL 📋
+          </button>
+          <a href="mailto:edits.shibanshi@gmail.com" class="btn btn-secondary">
+            SEND EMAIL ✉
+          </a>
+        </div>
+
+        <!-- Social Handles & Direct Links -->
+        <div class="social-row">
+          <a href="https://github.com/scriptededits" target="_blank" class="social-tag">GITHUB ↗</a>
+          <a href="https://drive.google.com" target="_blank" class="social-tag">DRIVE VAULT 📁</a>
+          <a href="https://youtube.com" target="_blank" class="social-tag">YOUTUBE ↗</a>
+          <a href="https://instagram.com" target="_blank" class="social-tag">INSTAGRAM ↗</a>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Brutalist Footer -->
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-left">
+        <strong>SCRIPTED EDITS</strong> // DESIGNED WITH NEO-BRUTALISM & GSAP
+      </div>
+      <div class="footer-center">
+        <span>EDITED BY SHIBANSHI • ALL RIGHTS RESERVED</span>
+      </div>
+      <div class="footer-right">
+        <a href="#hero" class="back-to-top">BACK TO TOP ↑</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Toast Notification Box -->
+  <div class="toast-notification" id="toast">
+    <span class="toast-icon">✔</span>
+    <span class="toast-msg">Copied to clipboard!</span>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="script.js"></script>
 </body>
 </html>
